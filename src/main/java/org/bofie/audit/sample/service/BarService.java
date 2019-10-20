@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.bofie.audit.sample.domain.Bar;
 import org.bofie.audit.sample.exceptions.BarException;
 import org.bofie.audit.sample.repository.BarRepository;
+import org.javers.core.Javers;
+import org.javers.core.JaversBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.Optional;
 public class BarService {
     private final BarRepository barRepository;
 
+    private final Javers javers = JaversBuilder.javers().build();
+
     public List<Bar> findAll() {
         return barRepository.findAll();
     }
@@ -23,16 +27,7 @@ public class BarService {
     }
 
     public Bar save(Bar bar) throws BarException {
-        if (bar.getId() == null){
-            return barRepository.save(bar);
-        }
-
-        Optional<Bar> old = barRepository.findById(bar.getId());
-        if (old.isPresent()){
-            return barRepository.save(bar);
-        }
-
-        throw new BarException("No Bar found");
+        return barRepository.save(bar);
     }
 
     public void deleteById(Long id) {

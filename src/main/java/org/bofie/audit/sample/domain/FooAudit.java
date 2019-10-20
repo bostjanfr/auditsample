@@ -2,22 +2,25 @@ package org.bofie.audit.sample.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.hibernate.envers.Audited;
 
-import javax.persistence.*;
-
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 
 @Entity
 @Data
 @AllArgsConstructor
-public class Foo {
+public class FooAudit {
 
     @Id
     @GeneratedValue
     private long id;
 
+    String stuff;
+
     @Embedded
     FooData fooData;
-
+    
 }

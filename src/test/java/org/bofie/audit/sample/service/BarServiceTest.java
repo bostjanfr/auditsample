@@ -19,7 +19,7 @@ class BarServiceTest {
 
     @Test
     void save() {
-
+/*
         Bar bar1 =  new Bar();
         bar1.setAge(12);
         bar1.setId(1L);
@@ -36,11 +36,14 @@ class BarServiceTest {
                 new Foo(1L, "Foo1"),
                 new Foo(2L, "Foo2"))));
 
-
+*/
         Javers javers = JaversBuilder.javers().build();
+
 
         Diff diff = javers.compare(bar1, bar2);
         String summery = diff.changesSummary();
-        System.out.println(summery);
+        System.out.println(javers.getJsonConverter().toJson(diff));
+
+
     }
 }
