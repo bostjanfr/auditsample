@@ -1,5 +1,6 @@
 package org.bofie.audit.sample.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -7,15 +8,11 @@ import javax.persistence.*;
 
 @Entity
 @Data
+@AllArgsConstructor
 public class Foo {
 
     @Id
     @GeneratedValue
     private long id;
     private String name;
-
-    @ManyToOne(targetEntity = Bar.class,  fetch = FetchType.LAZY)
-    @JoinColumn(name = "BAR_ID")
-    private Bar bar;
-
 }
